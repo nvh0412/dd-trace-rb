@@ -3,6 +3,8 @@
 require_relative '../../ext'
 require_relative '../../event'
 
+require 'byebug'
+
 module Datadog
   module Tracing
     module Contrib

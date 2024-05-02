@@ -3,6 +3,7 @@
 require_relative '../patcher'
 require_relative 'ext'
 require_relative 'events'
+require_relative 'producer_tracer'
 
 module Datadog
   module Tracing
@@ -19,6 +20,8 @@ module Datadog
           end
 
           def patch
+            ::Kafka::Producer.prepend(ProducerTracer)
+
             # Subscribe to Kafka events
             Events.subscribe!
           end

@@ -20,6 +20,11 @@ module Datadog
               def self.process(span, _event, _id, payload)
                 super
 
+                if configuration[:distributed_tracing]
+                  trace_digest = Kafka.extract(payload[:headers])
+                  Datadog::Tracing.continue_trace!(trace_digest)
+                end
+
                 span.resource = payload[:topic]
 
                 span.set_tag(Ext::TAG_TOPIC, payload[:topic]) if payload.key?(:topic)

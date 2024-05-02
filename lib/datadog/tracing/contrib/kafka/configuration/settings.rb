@@ -31,6 +31,7 @@ module Datadog
             end
 
             option :service_name
+            option :distributed_tracing, default: true, type: :bool
           end
         end
       end
