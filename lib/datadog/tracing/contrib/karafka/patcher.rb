@@ -18,7 +18,6 @@ module Datadog
           end
 
           def patch
-            debugger
             Events.subscribe!
           end
         end
