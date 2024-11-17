@@ -47,6 +47,10 @@ module Datadog
                     span.set_tag(Ext::TAG_PARTITION, job.executor.partition)
                     span.set_tag(Ext::TAG_OFFSET, job.messages.first.metadata.offset)
                   end
+
+                  puts "Starting span for #{consumer}##{action} with topic #{topic} and #{job.messages.count} messages"
+
+                  span
                 end
 
                 ::Karafka.monitor.subscribe 'worker.processed' do |event|
